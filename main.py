@@ -192,7 +192,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='DexiNed trainer.')
     parser.add_argument('--choose_test_data',
                         type=int,
-                        default=-1,
+                        default=0,
                         help='Already set the dataset for testing choice: 0 - 8')
     # ----------- test -------0--
 
