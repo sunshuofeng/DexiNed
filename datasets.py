@@ -76,7 +76,7 @@ def dataset_info(dataset_name, is_linux=True):
                 'img_width': 1280, # 1280 5 1920
                 'test_list': 'test_rgb.lst',
                 'train_list': 'train_rgb.lst',
-                'data_dir': '/opt/dataset/BIPED/edges',  # mean_rgb
+                'data_dir': 'data/edges',  # mean_rgb
                 'yita': 0.5
             },
             'CLASSIC': {
