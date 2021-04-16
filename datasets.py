@@ -132,7 +132,7 @@ def dataset_info(dataset_name, is_linux=True):
                       'img_width': 1280,  # 1280
                       'test_list': 'test_rgb.lst',
                       'train_list': 'train_rgb.lst',
-                      'data_dir': '../../dataset/BIPED/edges',  # WIN: '../.../dataset/BIPED/edges'
+                      'data_dir': 'data/edges',  # WIN: '../.../dataset/BIPED/edges'
                       'yita': 0.5},
             'CLASSIC': {'img_height': 512,
                         'img_width': 512,
