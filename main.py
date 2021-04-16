@@ -9,7 +9,7 @@ import cv2
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
-
+from torchtools.optim import RangerLars
 from datasets import DATASET_NAMES, BipedDataset, TestDataset, dataset_info
 from losses import *
 from model import DexiNed
@@ -392,9 +392,10 @@ def main(args):
         return
 
     criterion = bdcn_loss2
-    optimizer = optim.Adam(model.parameters(),
-                           lr=args.lr,
-                           weight_decay=args.wd)
+#     optimizer = optim.Adam(model.parameters(),
+#                            lr=args.lr,
+#                            weight_decay=args.wd)
+    optimizer=RangerLars(model.parameters(),lr=1e-3)
     # lr_schd = lr_scheduler.StepLR(optimizer, step_size=args.lr_stepsize,
     #                               gamma=args.lr_gamma)
 
