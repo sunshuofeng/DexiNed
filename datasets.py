@@ -335,13 +335,13 @@ class BipedDataset(Dataset):
                                        self.data_type)
 
             for directory_name in os.listdir(images_path):
-                image_directories = os.path.join(images_path, directory_name)
-                for file_name_ext in os.listdir(image_directories):
-                    file_name = os.path.splitext(file_name_ext)[0]
-                    sample_indices.append(
-                        (os.path.join(images_path, directory_name, file_name + '.jpg'),
-                         os.path.join(labels_path, directory_name, file_name + '.png'),)
+                file_name = os.path.splitext(directory_name)[0]
+                sample_indices.append(
+                        (os.path.join(images_path,  file_name + '.jpg'),
+                         os.path.join(labels_path, file_name + '.png'),)
                     )
+                
+               
         else:
             file_path = os.path.join(data_root,self.arg.train_list)
             with open(file_path, 'r') as f:
