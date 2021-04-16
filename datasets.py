@@ -305,7 +305,7 @@ class BipedDataset(Dataset):
         self.data_root = data_root
         self.train_mode = train_mode
         self.dataset_type = dataset_type
-        self.data_type = 'aug'  # be aware that this might change in the future
+        self.data_type = 'real'  # be aware that this might change in the future
         self.img_height = img_height
         self.img_width = img_width
         self.mean_bgr = mean_bgr
