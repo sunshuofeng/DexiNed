@@ -37,10 +37,10 @@ def train_one_epoch(epoch, dataloader, model, criterion, optimizer, device,
         preds_list = model(images)
         # loss = sum([criterion(preds, labels, l_w, device) for preds, l_w in zip(preds_list, l_weight)])  # cats_loss
         loss = sum([criterion(preds, labels,l_w) for preds, l_w in zip(preds_list,l_weight)]) # bdcn_loss
-        # loss = sum([criterion(preds, labels) for preds in preds_list])  #HED loss, rcf_loss
-#         optimizer.zero_grad()
-#         loss.backward()
-#         optimizer.step()
+        loss = sum([criterion(preds, labels) for preds in preds_list])  #HED loss, rcf_loss
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
         if tb_writer is not None:
             tb_writer.add_scalar('loss',
@@ -273,7 +273,7 @@ def parse_args():
 
     parser.add_argument('--epochs',
                         type=int,
-                        default=10,
+                        default=25,
                         metavar='N',
                         help='Number of training epochs (default: 25).')
     parser.add_argument('--lr',
@@ -394,12 +394,12 @@ def main(args):
         return
 
     criterion = bdcn_loss2
-#     optimizer = optim.Adam(model.parameters(),
-#                            lr=args.lr,
-#                            weight_decay=args.wd)
-    optimizer=RangerLars(model.parameters(),lr=1e-3)
-    # lr_schd = lr_scheduler.StepLR(optimizer, step_size=args.lr_stepsize,
-    #                               gamma=args.lr_gamma)
+    optimizer = optim.Adam(model.parameters(),
+                           lr=args.lr,
+                           weight_decay=args.wd)
+#     optimizer=RangerLars(model.parameters(),lr=1e-3)
+    lr_schd = lr_scheduler.StepLR(optimizer, step_size=args.lr_stepsize,
+                                  gamma=args.lr_gamma)
 
     # Main training loop
     seed=1021
