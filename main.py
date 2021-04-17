@@ -273,7 +273,7 @@ def parse_args():
 
     parser.add_argument('--epochs',
                         type=int,
-                        default=2,
+                        default=10,
                         metavar='N',
                         help='Number of training epochs (default: 25).')
     parser.add_argument('--lr',
