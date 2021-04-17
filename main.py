@@ -38,9 +38,9 @@ def train_one_epoch(epoch, dataloader, model, criterion, optimizer, device,
         # loss = sum([criterion(preds, labels, l_w, device) for preds, l_w in zip(preds_list, l_weight)])  # cats_loss
         loss = sum([criterion(preds, labels,l_w) for preds, l_w in zip(preds_list,l_weight)]) # bdcn_loss
         # loss = sum([criterion(preds, labels) for preds in preds_list])  #HED loss, rcf_loss
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+#         optimizer.zero_grad()
+#         loss.backward()
+#         optimizer.step()
 
         if tb_writer is not None:
             tb_writer.add_scalar('loss',
@@ -273,7 +273,7 @@ def parse_args():
 
     parser.add_argument('--epochs',
                         type=int,
-                        default=25,
+                        default=2,
                         metavar='N',
                         help='Number of training epochs (default: 25).')
     parser.add_argument('--lr',
@@ -346,6 +346,8 @@ def main(args):
 
     # Instantiate model and move it to the computing device
     model = DexiNed().to(device)
+    ckpt=torch.load('/content/drive/MyDrive/model_file/19_model.pth')
+    model.load_state_dict(ckpt)
     # model = nn.DataParallel(model)
     ini_epoch =0
     if not args.is_testing:
