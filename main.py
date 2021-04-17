@@ -346,8 +346,8 @@ def main(args):
 
     # Instantiate model and move it to the computing device
     model = DexiNed().to(device)
-    ckpt=torch.load('/content/drive/MyDrive/model_file/19_model.pth')
-    model.load_state_dict(ckpt)
+  
+#     model.load_state_dict(ckpt)
     # model = nn.DataParallel(model)
     ini_epoch =0
     if not args.is_testing:
@@ -398,8 +398,8 @@ def main(args):
                            lr=args.lr,
                            weight_decay=args.wd)
 #     optimizer=RangerLars(model.parameters(),lr=1e-3)
-    lr_schd = lr_scheduler.StepLR(optimizer, step_size=args.lr_stepsize,
-                                  gamma=args.lr_gamma)
+    lr_schd = lr_scheduler.StepLR(optimizer, step_size=10
+                                  )
 
     # Main training loop
     seed=1021
@@ -427,6 +427,7 @@ def main(args):
                         args.log_interval_vis,
                         tb_writer,
                         args=args)
+        lr_schd.step()
         validate_one_epoch(epoch,
                            dataloader_val,
                            model,
